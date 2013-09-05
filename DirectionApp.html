@@ -1,0 +1,111 @@
+<title>Google Maps API v3 Example: Directions Simple</title>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    <!-- Copy the javascript code here if you wish to try this code. -->
+</script>    
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+<div data-role="header">
+		<h1>Web Application for Google Maps and Weather</h1>
+	</div><!-- /header -->
+<div id='mainDiv' >
+	
+    <ul data-role="listview" data-inset="true" data-filter="false">
+        <li><input type = "button" value = "Goggle Maps"onclick= "javascript:showDiv()"/>
+      </li>
+	<li><input type = "button" value = "Weather" onclick = "initialize()"/></li>
+</ul>
+</div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<div id='mapDiv' style="visibility: hidden">
+
+     
+    <p>From : <input data-bind='value: firstName' id ='from'/></p> 
+    <p>&nbsp;&nbsp; &nbsp;To : <input data-bind='value: lastName' id='to' /></p> 
+    <input type = 'button' name = 'go' value = 'Go' onclick = "initialize()"/>  
+ <input type = 'button' name = 'back' value = 'Back' onclick = "backButtonFunction()"/>  
+	
+   
+    </div>
+<div id= "map_canvas" style="height: 400px; width: 400px"></div>
+   
+</body>
+</html>
+<script>
+function showDiv()
+{
+    alert("coming here");
+    document.getElementById('mainDiv').style.visibility = 'hidden'; 
+    document.getElementById('mapDiv').style.visibility = 'visible'; 
+}
+var directionDisplay;
+var directionsService = new google.maps.DirectionsService();     //Create a DirectionsService object which is required to communicate with the Google Maps API Direction Service
+var map;
+function initialize()
+{
+            directionsDisplay = new google.maps.DirectionsRenderer();        //Create a DirectionsRenderer object to render the directions results
+    var center = new google.maps.LatLng(0, 0);    //Map is centered at 0,0
+    var myOptions =
+    {
+            zoom:7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: center
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    directionsDisplay.setMap(map);
+    var start = "Pune";     //Set the source/ origin
+    var end = "Mumbai";  //Set the destination
+    var request =
+    {
+            origin:start,
+            destination:end,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING          //Current travel mode is DRIVING. You can change to BICYCLING or WALKING and see the changes.
+    };
+    directionsService.route(request, function(response, status)
+    {
+            if (status == google.maps.DirectionsStatus.OK) //Check if request is successful.
+            {
+            directionsDisplay.setDirections(response);         //Display the directions result
+            }
+    });
+}
+function showDiv()
+{
+    alert("coming here");
+    document.getElementById('mainDiv').style.visibility = 'hidden'; 
+    document.getElementById('mapDiv').style.visibility = 'visible'; 
+}
+var directionDisplay;
+var directionsService = new google.maps.DirectionsService();     //Create a DirectionsService object which is required to communicate with the Google Maps API Direction Service
+var map;
+function initialize()
+{
+            directionsDisplay = new google.maps.DirectionsRenderer();        //Create a DirectionsRenderer object to render the directions results
+    var center = new google.maps.LatLng(0, 0);    //Map is centered at 0,0
+    var myOptions =
+    {
+            zoom:7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: center
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    directionsDisplay.setMap(map);
+    var start = "Pune";     //Set the source/ origin
+    var end = "Mumbai";  //Set the destination
+    var request =
+    {
+            origin:start,
+            destination:end,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING          //Current travel mode is DRIVING. You can change to BICYCLING or WALKING and see the changes.
+    };
+    directionsService.route(request, function(response, status)
+    {
+            if (status == google.maps.DirectionsStatus.OK) //Check if request is successful.
+            {
+            directionsDisplay.setDirections(response);         //Display the directions result
+            }
+    });
+}
+
+</script>
